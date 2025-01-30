@@ -1,4 +1,7 @@
 <x-guest-layout>
+    
+    <x-form-title title="get started now" description="Enter your information to create the account"></x-form-title>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -20,10 +23,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <x-password-input label="password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -32,21 +32,34 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <x-password-input label="password_confirmation" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <!-- Term & Conditions -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="ms-2 text-sm text-gray-600">{{ __('I agree with ') }} <a href="#" class="underline">Terms & Conditions</a></span>
+            </label>
+        </div>
 
-            <x-primary-button class="ms-4">
+        <div class="mt-6">
+
+            <x-primary-button class="w-full justify-center">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+
+        <div class="mt-4 text-center">
+            <p class="text-gray-600">
+                Already have account? 
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    {{ __('Login') }}
+                </a>
+            </p>
+        </div>
+       
     </form>
 </x-guest-layout>
